@@ -564,11 +564,9 @@ module Fog
 
               if params[:headers]['Content-Encoding']
                 encoding = "aws-chunked, #{params[:headers]['Content-Encoding']}"
-              else
-                encoding = "aws-chunked, identity"
               end
 
-              params[:headers]['Content-Encoding']  = encoding
+              params[:headers]['Content-Encoding']  = encoding if encoding
             else
               params[:headers]['x-amz-content-sha256'] ||= Digest::SHA256.hexdigest(params[:body] || '')
             end
